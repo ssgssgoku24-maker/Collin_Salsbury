@@ -1,66 +1,61 @@
-const gameText = document.getElementById('game-text2');
-const userInput = document.getElementById('user-input2');
-const submitBtn = document.getElementById('submit-btn2');
-
-// Print to the screen
-function print(text) {
-    gameText.innerText += text + "\n";
-    gameText.scrollTop = gameText.scrollHeight;
-}
-
-// Sleep function
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-let currentStep = "askUsername";
-let username = "";
-
-// Button click handler
-submitBtn.addEventListener("click", async () => {
-    const input = userInput.value.trim();
-    userInput.value = "";
-
-
-    // STEP 1 → Ask username
-    if (currentStep === "askUsername") {
-        username = input;
-
-        if (username === "student" || username === "teacher") {
-            print("Thank you.");
-            await sleep(1000);
-            print("Please input your password:");
-            currentStep = "askPassword";
-        } else {
-            print("Incorrect username. Please refresh page and try again.");
-            currentStep = "end";
-        }
-
-    // STEP 2 → Ask password
-} else if (currentStep === "askPassword") {
-    const password1 = input;
-
-    if (username === "student" && password1 === "123456") {
-        print("You are logged in as a student.");
-        document.getElementById("main-link").style.display = "block";  // ← SHOW LINK
-    } else if (username === "teacher" && password1 === "qwerty") {
-        print("You are logged in as a teacher.");
-        document.getElementById("main-link").style.display = "block";  // ← SHOW LINK
-    } else {
-        print("Incorrect password.");
-        await sleep(1500);
-        print("Refresh page and try again.");
-    }
-
-    currentStep = "end";
-
-
-    // END → Game is finished
-    } else if (currentStep === "end") {
-        print("Session finished. Refresh page to try again.");
-    }
-});
-
-// Start text
-print("Log-in Page \n\nWelcome! Please enter your username:");
-Displaying javaScript.txt.
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyPersonal Webpage Log-In</title>
+    <style>
+      body {
+      background-color: powderblue;
+      font-family: Arial;
+      color: black;
+      text-align: center;
+      }
+      h1 {
+        color: navy;
+        font-size: 36px;
+      }
+      div.header {
+        background-color: tomato;
+        color: white;
+        tex-align: center;
+        padding: 20px;
+      }
+      .game-text2 {
+        white-space: pre-line;
+        height: 110px;
+        overflow-y: auto;
+        margin-bottom: 10px;
+      }
+      .game-input2 {
+        display: flex;
+      }
+      .user-input2 {
+        flex:1;
+        padding: 5px;
+        font-size: 16px;
+      }
+      .submit-btn2 {
+        padding: 5px 10px;
+        margin-left: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Log-in Page for My Personal Webpage</h1>
+      <br>
+  <center>
+    <div id = "game-text2" class = "game-text2">
+    </div>
+    <input id = "user-input2" class = "user-input2" type="text" placeholder = "Username">
+    <button id = "submit-btn2" class = "submit-btn2">Submit</button>
+    </div>
+  </center>
+    <script src = "login.js"></script>
+    <br>
+    <a id = "main-link" href = "index2.html" style = "display:none;">
+      <button>Enter Main Page</button>
+    </a>
+  </body>
+</html>
